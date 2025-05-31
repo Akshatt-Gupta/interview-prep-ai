@@ -5,7 +5,7 @@ import HERO_IMG from "../assets/HERO_IMG.png";
 import { APP_FEATURES } from "../utils/data.js";
 import Modal from "../components/Loader/Modal.jsx";
 import Login from "./Auth/Login.jsx";
-import SignUp from "./Auth/Signup.jsx";
+import SignUp from "./Auth/SignUp.jsx";
 import { useUserContext } from "../context/userContext.jsx";
 import ProfileInfoCard from "../components/Cards/ProfileInfoCard.jsx";
 
