@@ -59,7 +59,7 @@ app.use((req, res, next) => {
 });
 
 // Start Server
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT || 'https://interview-prep-ai-etzt.onrender.com'
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
