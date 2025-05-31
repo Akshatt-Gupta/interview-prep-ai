@@ -3,10 +3,8 @@
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
-    "start": "node -r dotenv/config server.js",
-    "dev": "nodemon server.js",
-    "predeploy": "npm install --omit=dev"
-    
+    "start": "node server.js",
+    "dev": "nodemon server.js"
   },
   "keywords": [],
   "author": "",
