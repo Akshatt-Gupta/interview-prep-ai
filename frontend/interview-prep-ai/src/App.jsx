@@ -25,7 +25,7 @@ const App = () => {
       />
       <Routes>
         <Route path="/" element={<LandingPage />} />
-        <Route path="/signup" element={<SignUp />} />
+        <Route path="/signup" element={<Signup />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/interview-prep/:sessionId" element={<InterviewPrep />} />
       </Routes>
