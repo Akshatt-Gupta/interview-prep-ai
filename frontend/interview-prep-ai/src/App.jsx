@@ -4,7 +4,7 @@ import{Toaster} from "react-hot-toast";
 import { UserContextProvider } from "./context/userContext";
 
 import Login from "./pages/Auth/Login";
-import SignUp from "./pages/Auth/Signup";
+import SignUp from "./pages/Auth/SignUp";
 import LandingPage from "./pages/LandingPage";
 import Dashboard from "./pages/Home/Dashboard";
 import InterviewPrep from "./pages/InterviewPrep/InterviewPrep";
