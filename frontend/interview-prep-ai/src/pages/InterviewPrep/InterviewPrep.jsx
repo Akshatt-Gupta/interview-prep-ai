@@ -50,7 +50,7 @@ const InterviewPrep = () => {
       if (!session?.role) throw new Error("Role information missing");
       if (!session?.experience) throw new Error("Experience level missing");
   
-      // 2. Make API call to generate questions
+      // 2. Make API call here to generate questions
       const { data: aiData } = await axiosInstance.post(
         API_PATHS.AI.GENERATE_QUESTIONS,
         {
@@ -60,8 +60,9 @@ const InterviewPrep = () => {
           numberOfQuestions: 10,
         }
       );
-  
-      // 3. Handle multiple possible response formats
+      
+      /* getting diffrent possible results hence to narrow down to these */
+
       let questionsArray = [];
       
       // Case 1: Direct array response

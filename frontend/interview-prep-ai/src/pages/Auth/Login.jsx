@@ -80,12 +80,10 @@ const Login = ({ setCurrentPage, onClose }) => {
     setIsLoading(true);
 
     try {
-      // Make login request
       const response = await axiosInstance.post(API_PATHS.AUTH.LOGIN, formData);
       
       if (response.data) {
         const userData = response.data;
-        // Ensure we have the required user data
         if (!userData.token) {
           throw new Error('No authentication token received');
         }

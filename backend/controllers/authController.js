@@ -65,7 +65,7 @@ const loginUser = asyncHandler(async (req, res) => {
             return res.status(400).json({ message: "Please provide email and password" });
         }
 
-        // Find user
+        // Finding user
         const user = await User.findOne({ email });
         console.log('User found:', user ? 'Yes' : 'No');
         
@@ -73,7 +73,7 @@ const loginUser = asyncHandler(async (req, res) => {
             return res.status(401).json({ message: "Invalid email or password" });
         }
 
-        // Check password
+        // Checking password
         const isMatch = await bcrypt.compare(password, user.password);
         console.log('Password match:', isMatch ? 'Yes' : 'No');
         

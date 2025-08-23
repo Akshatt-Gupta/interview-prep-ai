@@ -13,14 +13,14 @@ exports.createSession = asyncHandler(async (req, res) => {
             return res.status(400).json({ message: "Please provide all required fields" });
         }
 
-        // Create the session with user reference
+        
         const session = await Session.create({
             userId: req.user._id, // Using _id from auth middleware
             role,
             experience,
             topicToFocus,
             description,
-            questions: [], // Initialize empty, will be populated with question IDs
+            questions: [], 
         });
 
         if (questions && Array.isArray(questions)) {

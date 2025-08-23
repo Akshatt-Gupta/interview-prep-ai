@@ -43,14 +43,14 @@ const generateInterviewQuestions = async (req, res) => {
             });
         }
 
-        // Generate prompt
         const prompt = questionAnswerPrompt(role, experience, topicToFocus, numberOfQuestions);
         console.log(prompt);
         
         // Get model instance
         const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash-lite" });
-        console.log(model);
-        // Generate content
+        //console.log(model);
+        
+
         const result = await model.generateContent(prompt);
         const response = await result.response;
         console.log(result);
@@ -65,15 +65,14 @@ const generateInterviewQuestions = async (req, res) => {
         console.log("Raw AI response text:", rawText);
         // Remove code block markers and control characters
         let cleanedText = rawText
-            .replace(/^[^\[{]*([\[{])/, '$1') // Remove anything before [ or {
+            .replace(/^[^\[{]*([\[{])/, '$1') 
             .replace(/```json|```/g, "")
             .replace(/[\u0000-\u001F\u007F-\u009F]/g, "")
             .trim();
 
-        // Attempt to fix common trailing commas
         cleanedText = cleanedText.replace(/,\s*([}\]])/g, '$1');
 
-        // Parse and validate response
+        
         try {
             const questions = JSON.parse(cleanedText);
             return res.status(200).json({
@@ -127,7 +126,6 @@ const generateConceptExplanation = async (req, res) => {
             });
         }
 
-        // Generate prompt
         const prompt = conceptExplainPrompt(question);
         
         // Get model instance

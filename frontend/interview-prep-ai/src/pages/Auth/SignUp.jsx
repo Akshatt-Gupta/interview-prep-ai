@@ -78,7 +78,6 @@ const SignUp = ({ onClose, setCurrentPage }) => {
 
     try {
       let imageUrl = "";
-      // Upload image first if exists (using direct axios since we don't have token yet)
       if (profilePicFile) {
         const formData = new FormData();
         formData.append("image", profilePicFile);
@@ -95,7 +94,7 @@ const SignUp = ({ onClose, setCurrentPage }) => {
         imageUrl = uploadRes.data.imageUrl;
       }
 
-      // Register user with axiosInstance
+      //register user
       const { data } = await axiosInstance.post(API_PATHS.AUTH.REGISTER, {
         name: formData.fullName,
         email: formData.email,
@@ -122,7 +121,7 @@ const SignUp = ({ onClose, setCurrentPage }) => {
   const handlePhotoChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      // Client-side validation
+      // less than 5MB needed
       if (file.size > 5 * 1024 * 1024) {
         toast.error("Image must be less than 5MB");
         return;

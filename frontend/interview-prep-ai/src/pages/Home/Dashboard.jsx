@@ -27,7 +27,9 @@
                 
                 // Validate response structure
                 if (response?.data) {
-                    console.log('Sessions response:', response.data); // Debug log
+                    // console.log("xxxxxxxxxxxxxxxxxxxxxx");
+                    // console.log('Sessions response:', response.data); 
+                    // console.log("xxxxxxxxxxxxxxxxxxxxxx");
                     setSessions(Array.isArray(response.data) ? response.data : 
                             (Array.isArray(response.data.sessions) ? response.data.sessions : []));
                 } else {
@@ -61,8 +63,7 @@
         };
         
         const handleCreateSession = async (sessionData) => {
-            // This function is passed to CreateSessionForm but now CreateSessionForm 
-            // handles session creation internally - this is kept for backward compatibility
+            // This function is passed to CreateSessionForm but now CreateSessionForm
             setRefreshTrigger(prev => prev + 1);
             setOpenCreateModal(false);
             return true;

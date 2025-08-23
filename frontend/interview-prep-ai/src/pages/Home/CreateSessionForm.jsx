@@ -7,7 +7,7 @@ import { API_PATHS } from "../../utils/apiPaths";
 const CreateSessionForm = ({ onCancel }) => {
   const [formData, setFormData] = useState({
     role: "",
-    topicToFocus: "", // Changed to singular to match backend
+    topicToFocus: "", 
     experience: "",
     description: "",
   });
@@ -60,7 +60,7 @@ const CreateSessionForm = ({ onCancel }) => {
         {
           role,
           experience,
-          topicToFocus, // Singular form matching backend
+          topicToFocus, 
           numberOfQuestions: 10
         }
       ).catch(error => {
@@ -73,7 +73,7 @@ const CreateSessionForm = ({ onCancel }) => {
       const sessionResponse = await axiosInstance.post(API_PATHS.SESSION.CREATE, {
         role: role.trim(),
         experience: experience.toString().trim(),
-        topicToFocus: topicToFocus.trim(), // Singular form matching backend
+        topicToFocus: topicToFocus.trim(), 
         description: description.trim(),
         questions: aiResponse.data.data,
       }).catch(error => {
