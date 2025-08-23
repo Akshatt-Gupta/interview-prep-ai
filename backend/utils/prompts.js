@@ -26,10 +26,10 @@ const conceptExplainPrompt = (question) => `
 You are an AI trained to generate explanations for a given interview question.
 
 Task:
-- Explain the following interview question and its concept in depth as if you're teaching a beginner developer.
+- Explain the following interview question and its concept in depth as if you're teaching a beginner.
 - Question: "${question}"
 - After the explanation, provide a short and clear title that summarizes the concept for the article or page header.
-- If the explanation includes a code example, provide a small code block.
+- Only include a code example if the question is for a developer, software engineer, SDE, or programming-related role. Do NOT include code for non-technical roles like bank manager, analyst, HR, etc.
 - Keep the formatting very clean and clear.
 - Return the result as a valid JSON object in the following format:
 

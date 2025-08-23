@@ -28,7 +28,7 @@ const AIResponsePreview = ({ content }) => {
                         },
                         
                         p({ children }) {
-                            return <pre className="mb-4 leading-relaxed">{children}</pre>;
+                            return <p className="mb-4 leading-relaxed break-words whitespace-pre-line text-gray-800 text-sm md:text-base">{children}</p>;
                         },
                         strong({ children }) {
                             return <strong className="font-semibold">{children}</strong>;

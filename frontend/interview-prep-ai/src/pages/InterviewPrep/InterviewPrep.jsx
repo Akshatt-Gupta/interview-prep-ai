@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import moment from "moment";
 import { toast } from "react-hot-toast";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion as Motion } from "framer-motion";
 import { LuCircleAlert, LuListCollapse, LuArrowUp } from "react-icons/lu";
 import DashboardLayout from "../../components/Layout/DashboardLayout";
 import RoleInfoHeader from "../../components/RoleInfoHeader";
@@ -235,7 +235,7 @@ const InterviewPrep = () => {
                 {[...session.questions]
                   .sort((a, b) => (a.isPinned === b.isPinned ? 0 : a.isPinned ? -1 : 1))
                   .map((data) => (
-                    <motion.div
+                    <Motion.div
                       key={data._id}
                       initial={{ opacity: 0, y: -20 }}
                       animate={{ opacity: 1, y: 0 }}
@@ -254,7 +254,7 @@ const InterviewPrep = () => {
                         onTogglePin={() => toggleQuestionPinStatus(data._id)}
                         onLearnMore={() => generateConceptExplanation(data.question)}
                       />
-                    </motion.div>
+                    </Motion.div>
                   ))}
               </AnimatePresence>
             ) : (

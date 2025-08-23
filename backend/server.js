@@ -31,14 +31,49 @@ const corsOptions = {
 // Apply CORS globally
 app.use(cors(corsOptions));
 
+app.post('/abcd', async (req, res) => {
+  try {
+    const response = await fetch(
+      'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-goog-api-key': process.env.GEMINI_API_KEY // Use environment variable
+        },
+        body: JSON.stringify({
+          contents: [
+            {
+              parts: [
+                {
+                  text: "You are an AI trained to generate technical interview questions and answers.\n\nTask:\n- Role: content writing\n- Candidate Experience: 10 years\n- Focus Topics: comedy\n- Write 10 interview questions.\n- For each question, generate a detailed but beginner-friendly answer.\n- If the answer needs a code example, add a small code block inside.\n- Keep formatting very clean.\n- Return a pure JSON array like:\n\n\n[\n  {\n    \"question\": \"Question here?\",\n    \"answer\": \"Answer here.\"\n  },\n  ...\n]\n\n\nImportant: Do NOT add any extra text. Only return valid JSON."
+                }
+              ]
+            }
+          ]
+        })
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    res.json(data);
+  } catch (error) {
+    console.error('Error calling Gemini API:', error);
+    res.status(500).json({ error: 'Failed to call Gemini API' });
+  }
+});
 // Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/sessions", protect, sessionRoutes);
 app.use("/api/questions", protect, questionRoutes);
 
 // AI Routes
-app.post("/api/ai/generate-questions", protect, generateInterviewQuestions);
-app.post("/api/ai/generate-explanation", protect, generateConceptExplanation);
+app.post("/api/ai/generate-questions",generateInterviewQuestions);
+app.post("/api/ai/generate-explanation",generateConceptExplanation);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
@@ -59,6 +94,7 @@ app.use((req, res, next) => {
 });
 
 // Start Server
+
 const PORT = process.env.PORT || 'https://interview-prep-ai-etzt.onrender.com'
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);

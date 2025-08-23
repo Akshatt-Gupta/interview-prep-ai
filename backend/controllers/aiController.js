@@ -10,6 +10,7 @@ const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
  * @access  Private
  */
 const generateInterviewQuestions = async (req, res) => {
+    console.log("Function reached")
     try {
         // Validate request body exists
         if (!req.body || Object.keys(req.body).length === 0) {
@@ -44,13 +45,16 @@ const generateInterviewQuestions = async (req, res) => {
 
         // Generate prompt
         const prompt = questionAnswerPrompt(role, experience, topicToFocus, numberOfQuestions);
+        console.log(prompt);
         
         // Get model instance
         const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash-lite" });
-
+        console.log(model);
         // Generate content
         const result = await model.generateContent(prompt);
         const response = await result.response;
+        console.log(result);
+        console.log(response);
         
         if (!response) {
             throw new Error('No response from AI model');
@@ -58,11 +62,17 @@ const generateInterviewQuestions = async (req, res) => {
 
         // Process response
         const rawText = response.text();
-        const cleanedText = rawText
-            .replace(/^\s*```json\s*/, "")
-            .replace(/\s*```$/, "")
+        console.log("Raw AI response text:", rawText);
+        // Remove code block markers and control characters
+        let cleanedText = rawText
+            .replace(/^[^\[{]*([\[{])/, '$1') // Remove anything before [ or {
+            .replace(/```json|```/g, "")
+            .replace(/[\u0000-\u001F\u007F-\u009F]/g, "")
             .trim();
-            
+
+        // Attempt to fix common trailing commas
+        cleanedText = cleanedText.replace(/,\s*([}\]])/g, '$1');
+
         // Parse and validate response
         try {
             const questions = JSON.parse(cleanedText);
@@ -72,6 +82,8 @@ const generateInterviewQuestions = async (req, res) => {
             });
         } catch (parseError) {
             console.error('Failed to parse AI response:', parseError);
+            console.error('Raw AI response text for debugging:', rawText);
+            console.error('Cleaned AI response text for debugging:', cleanedText);
             throw new Error('Invalid response format from AI');
         }
 

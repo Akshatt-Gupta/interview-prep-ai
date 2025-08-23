@@ -25,7 +25,7 @@ const ProfileInfoCard = () => {
     };
 
     return (
-        <div className="flex items-center gap-3 bg-white/50 backdrop-blur-sm px-3 py-2 rounded-full border border-gray-100 hover:border-gray-200 transition-all duration-200">
+        <div className="flex items-center gap-3 bg-white/80 backdrop-blur-sm px-3 py-2 rounded-xl border border-gray-100 shadow-md hover:shadow-lg transition-all duration-200">
             {user.profileImageUrl ? (
                 <img 
                     src={user.profileImageUrl}

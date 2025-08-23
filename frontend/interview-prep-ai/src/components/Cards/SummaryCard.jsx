@@ -33,10 +33,9 @@ const SummaryCard = ({
 
   return (
     <div
-      className="relative bg-white rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden group cursor-pointer h-full flex flex-col"
-      style={{ background: colors || '#e8faf5' }}
+      className="relative bg-white rounded-xl md:rounded-2xl shadow-xl shadow-gray-100/70 border border-gray-100/60 group cursor-pointer h-full flex flex-col transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl overflow-hidden"
+      style={{ background: colors || '#f8fafc' }}
       onClick={(e) => {
-        // Only trigger if not clicking on delete button
         if (!e.target.closest('.delete-button')) {
           onSelect();
         }
@@ -67,19 +66,19 @@ const SummaryCard = ({
       </button>
 
       {/* Card content */}
-      <div className="p-5 flex-grow flex flex-col">
+      <div className="p-4 md:p-5 flex-grow flex flex-col">
         {/* Header with initials and role */}
-        <div className="flex items-center mb-4">
-          <div className="flex items-center justify-center w-10 h-10 rounded-full bg-white/90 text-gray-700 text-lg font-bold mr-3 border border-gray-200">
+        <div className="flex items-center mb-4 gap-3">
+          <div className="flex items-center justify-center w-10 h-10 rounded-full bg-gradient-to-r from-[#FF9324] to-[#e99a4b] text-white text-lg font-bold border border-gray-100 shadow-sm">
             {initials}
           </div>
           
           <div className="flex flex-col">
-            <h3 className="text-lg font-bold text-gray-900 line-clamp-1">
+            <h3 className="text-base md:text-lg font-bold text-gray-900 line-clamp-1">
               {role}
             </h3>
             {formattedTopics && (
-              <div className="text-xs text-gray-600 line-clamp-1">
+              <div className="text-xs text-gray-500 line-clamp-1">
                 {formattedTopics}
               </div>
             )}
@@ -89,16 +88,16 @@ const SummaryCard = ({
         {/* Info pills */}
         <div className="flex flex-wrap gap-2 mb-3">
           {experience && (
-            <span className="text-xs bg-white/80 text-gray-700 px-3 py-1 rounded-full border border-gray-200">
+            <span className="text-xs bg-white/80 text-gray-700 px-3 py-1 rounded-full border border-gray-100">
               Exp: {experience} {experience === '1' ? 'Year' : 'Years'}
             </span>
           )}
           
-          <span className="text-xs bg-white/80 text-gray-700 px-3 py-1 rounded-full border border-gray-200">
+          <span className="text-xs bg-white/80 text-gray-700 px-3 py-1 rounded-full border border-gray-100">
             {questions} Q&A
           </span>
           
-          <span className="text-xs bg-white/80 text-gray-700 px-3 py-1 rounded-full border border-gray-200">
+          <span className="text-xs bg-white/80 text-gray-700 px-3 py-1 rounded-full border border-gray-100">
             Updated: {formattedDate}
           </span>
         </div>
@@ -106,7 +105,7 @@ const SummaryCard = ({
         {/* Description */}
         {description && (
           <div className="mt-2 flex-grow">
-            <p className="text-sm text-gray-600 line-clamp-3">
+            <p className="text-sm text-gray-600 line-clamp-3 break-words">
               {description}
             </p>
           </div>
